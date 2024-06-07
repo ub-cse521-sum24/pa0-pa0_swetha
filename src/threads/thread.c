@@ -335,7 +335,8 @@ thread_foreach (thread_action_func *func, void *aux)
 void
 thread_set_priority (int new_priority) 
 {
-  /* Not yet implemented. */
+  int updated_val = new_priority;
+  thread_current ()->priority = updated_val;
 }
 
 /* Returns the current thread's priority. */
@@ -488,7 +489,7 @@ alloc_frame (struct thread *t, size_t size)
    will be in the run queue.)  If the run queue is empty, return
    idle_thread. */
 static struct thread *
-next_thread_to_run (void) 
+next_thread_to_run (void)
 {
   if (list_empty (&ready_list))
     return idle_thread;
